@@ -31,7 +31,7 @@ router.get('/get-og', async (req, res) => {
 
     const $ = cheerio.load(html);
 
-    const ogImage = $('meta[property="og:image"]').attr('content') || $('meta[property="og:image:url"]').attr('content');
+    const ogImage = $('meta[property="og:image"]').attr('content') || $('meta[property="og:image:url"]').attr('content') || $('meta[name="og:image"]').attr('content') || $('meta[name="og:image:url"]').attr('content');
 
     if (!ogImage) {
       return res.status(404).json({
