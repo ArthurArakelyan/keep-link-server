@@ -34,12 +34,11 @@ router.get('/get-og', async (req, res) => {
     const ogImage = $('meta[property="og:image"]').attr('content') || $('meta[property="og:image:url"]').attr('content') || $('meta[name="og:image"]').attr('content') || $('meta[name="og:image:url"]').attr('content');
 
     if (!ogImage) {
-      console.log('OG image not found in this html markup: ', html);
-
       return res.status(404).json({
         success: false,
         statusCode: 404,
         message: 'OG image not found',
+        markup: html,
       });
     }
 
