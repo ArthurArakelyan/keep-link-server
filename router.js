@@ -1,5 +1,6 @@
 import express from 'express';
 import fetch from 'node-fetch';
+import got from 'got';
 import * as cheerio from 'cheerio';
 
 const router = express.Router();
@@ -26,6 +27,7 @@ router.get('/get-og', async (req, res) => {
       });
     }
 
+    const { body } = await got(url);
     const response = await fetch(url);
     const html = await response.text();
 
@@ -39,6 +41,7 @@ router.get('/get-og', async (req, res) => {
         statusCode: 404,
         message: 'OG image not found',
         markup: html,
+        gotMarkup: body,
       });
     }
 
